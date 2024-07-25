@@ -1,0 +1,15 @@
+{
+  "name": "tf-play",
+  "version": "1.0.0",
+  "description": "Just a playground for Silver",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Silver",
+  "license": "ISC",
+  "dependencies": {
+    "@tensorflow/tfjs": "^4.20.0",
+    "@tensorflow/tfjs-node": "^4.20.0"
+  }
+}
