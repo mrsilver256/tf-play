@@ -9,8 +9,11 @@
   "author": "Silver",
   "license": "ISC",
   "dependencies": {
+    "@tensorflow-models/qna": "^1.0.2",
     "@tensorflow/tfjs": "^4.20.0",
+    "@tensorflow/tfjs-backend-webgl": "^4.20.0",
     "@tensorflow/tfjs-node": "^4.20.0",
-    "natural": "^7.1.0"
+    "natural": "^7.1.0",
+    "openai": "^4.55.4"
   }
 }

@@ -1,4 +1,14 @@
-As a reviewer, you need to be objective. Because of that, if you need to code directly, do not review your own code.
+// Note: you do not need to import @tensorflow/tfjs here, but make sure you have installed the peer dependencies for tfjs-core and tfjs-converter.
+const tf = require("@tensorflow/tfjs-node");
+const qna = require("@tensorflow-models/qna");
+const OpenAI = require("openai");
+const openai = new OpenAI({apiKey: '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'});
+
+const run = async () => {
+  // Load the model.
+  const model = await qna.load();
+  const question = "If the code of a core function needs to be changed because of bugs";
+  const passage = `As a reviewer, you need to be objective. Because of that, if you need to code directly, do not review your own code.
 
 General
 You might say that you have enough experience to see potential bugs in your code, and you can ensure that there's no problem because you understand it. However, when you review your own code, you see it from the same point of view as when you create it. This behavior will reduce the ability to see potential problems from other points of view.
@@ -39,4 +49,27 @@ Unless bugs occur, the code of core functionality should be reserved. If a redes
 
 Doing that ensures a smooth transition from the old design to the new one. Old data are still processed correctly because the old code remains.
 
-If the code of a core function needs to be changed because of bugs, it should only fix the bug without affecting other parts of the core functionality.
+If the code of a core function needs to be changed because of bugs, it should only fix the bug without affecting other parts of the core functionality.`;
+    
+// Finding the answers
+  const answers = await model.findAnswers(question, passage);
+
+  console.log("Answers: ");
+  if(answers.length > 0) {
+    console.log(answers[0].text);
+  } else {
+    console.log("No answers found");
+    // anotherBotAnswerForMe(question);
+  }
+};
+
+
+async function anotherBotAnswerForMe(question) {
+  const completion = await openai.chat.completions.create({
+    messages: [{ role: "system", content: question }],
+    model: "gpt-4o",
+  });
+  console.log(completion.choices[0]?.message.content);
+}
+
+run();
