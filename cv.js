@@ -431,18 +431,6 @@ const candidates = [
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 // Train the model
 async function trainModel() {
     // Prepare input (X) and output (y)
@@ -535,9 +523,9 @@ async function predictPass(model, candidates) {
 
 const run = async () => {
     // Call the function to start training
-    // const model = await trainModel();
-    // saveModel(model, 'cv_bot')
-    const model = await loadModel('cv_bot')
+    const model = await trainModel();
+    saveModel(model, 'cv_bot')
+    // const model = await loadModel('cv_bot')
     const passed = await predictPass(model, candidates);
     console.log('This CV is passed? ', passed > 0 ? 'Yes' : 'No')
 }
